@@ -1,0 +1,51 @@
+{
+  "compilerOptions": {
+    // ECMAScript target version
+    "target": "ES2017",
+
+    // Libraries included in the compilation
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+
+    // JSX handling (required for Next.js)
+    "jsx": "preserve",
+
+    // Module system
+    "module": "ESNext",
+    "moduleResolution": "node",
+
+    // Enable/disable specific compiler features
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "noEmit": true,
+    "incremental": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+
+    // Optional: helps with case sensitivity issues across OS
+    "forceConsistentCasingInFileNames": true,
+
+    // Set up path aliases like "@/components/*"
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"]
+    },
+
+    // Next.js plugin
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
+  },
+
+  "include": [
+    "next-env.d.ts",
+    ".next/types/**/*.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+
+  "exclude": ["node_modules"]
+}
