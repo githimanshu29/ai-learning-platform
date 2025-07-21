@@ -23,6 +23,7 @@ import {
 } from "lucide-react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import AddNewCourseDialog from "./AddNewCourseDialog";
 
 const SideBarOptions = [
   {
@@ -67,9 +68,11 @@ const AppSidebar = () => {
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
+          <AddNewCourseDialog >
           <Button className="bg-blue-500 text-white hover:bg-blue-600 px-6 py-3 rounded-lg shadow-md">
             Create New Course
           </Button>
+          </AddNewCourseDialog>
         </SidebarGroup>
 
         <SidebarGroup>
