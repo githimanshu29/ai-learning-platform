@@ -1,8 +1,18 @@
+// jsconfig.json
 {
   "compilerOptions": {
-    "baseUrl": ".", // 👈 sets root to project root
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"] // 👈 so @/components becomes ./components
-    }
-  }
+      "@/*": ["./*"] // This is crucial for absolute imports like `@/components`
+    },
+    "jsx": "preserve", // Important for Next.js React components
+    "allowJs": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"],
+  "exclude": ["node_modules"]
 }

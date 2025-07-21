@@ -28,9 +28,15 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        {/* Each time you visit a different URL, Next.js figures out the matching page.js file, and then injects it into {children} in your layout — automatically. */}
         <Provider>
         {children}
-          </Provider>       
+          </Provider>  
+               {/* This ensures that any child component inside {children} — which is any page or nested layout — can access the user data via Context.You don’t need to manually pass props to every child component.
+
+
+
+ */}
       </body>
     </html>
 
