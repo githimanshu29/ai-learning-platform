@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import {
   Dialog,
   DialogContent,
@@ -25,9 +26,17 @@ import {
   Tag,
   BarChart3,
   Video,
+  Loader2Icon,
 } from "lucide-react";
+import { v4 as uuidv4 } from 'uuid';
+
 
 const AddNewCourseDialog = ({ children }) => {
+  const [loading, setLoading] = useState(false);
+
+
+
+
     const [formData, setFormData] = useState({
         name: "",
         description: "",
@@ -48,9 +57,28 @@ const AddNewCourseDialog = ({ children }) => {
         console.log("Form Data: ", formData);
     }
 
-    const onGenerate =()=>{
+    const onGenerate =async()=>{
         console.log(formData);
+        const courseId=uuidv4();
+
+      
+        try{
+
+        
+        setLoading(true);
+        const result = await axios.post('/api/generate-course-layout', {
+          ...formData,
+          courseId:courseId
+        });
+        console.log(result.data);
+        setLoading(false);
+    } catch(e){
+      setLoading(false);
+      console.log(e);
+
+
     }
+  }
 
 
   return (
@@ -172,8 +200,10 @@ const AddNewCourseDialog = ({ children }) => {
               }
 
                 onClick={onGenerate}
+                disabled={loading}
             >
-              <Sparkles className="mr-2 h-5 w-5" />
+              {loading? <Loader2Icon className="animate-spin "/>:<Sparkles className="mr-2 h-5 w-5" />}
+              
               Generate Course
             </Button>
           </div>
