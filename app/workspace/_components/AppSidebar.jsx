@@ -1,5 +1,6 @@
 "use client";
-
+import Image from 'next/image';
+import logo from "../../../public/logo.svg";
 import React from "react";
 import {
   Sidebar,
@@ -64,7 +65,7 @@ const AppSidebar = () => {
   return (
     <Sidebar>
       <SidebarHeader className={"p-4"}>
-        <img src="logo.svg" alt="logo" width={110} height={95} />
+        <Image src={logo} alt="logo" width={110} height={95} />
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>

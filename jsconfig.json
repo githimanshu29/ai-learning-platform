@@ -2,6 +2,7 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
+ 
     "paths": {
       "@/*": ["./*"] // This is crucial for absolute imports like `@/components`
     },

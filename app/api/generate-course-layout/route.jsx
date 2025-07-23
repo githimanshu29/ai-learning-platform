@@ -95,10 +95,9 @@ export async function POST(req) {
 
         // Extract the 'course' object directly from the parsed JSON response
         const courseDetails = JSONResp.course;
+        
 
-        // *** THE CRUCIAL MODIFICATION ***
-        // Instead of spreading `...formData` for the main course details,
-        // explicitly map from `courseDetails` (the AI's output).
+      
         const result = await db.insert(coursesTable).values({
             cid: courseId, // `courseId` comes from the request body
             name: courseDetails.name,

@@ -29,6 +29,7 @@ import {
   Loader2Icon,
 } from "lucide-react";
 import { v4 as uuidv4 } from 'uuid';
+import { useRouter } from "next/navigation";
 
 
 const AddNewCourseDialog = ({ children }) => {
@@ -46,6 +47,8 @@ const AddNewCourseDialog = ({ children }) => {
         includeVideo: false,
 
     });
+
+    const router = useRouter();
 
     const onHandleInputChange = (field, value) => {
         setFormData(prev=>({
@@ -72,6 +75,8 @@ const AddNewCourseDialog = ({ children }) => {
         });
         console.log(result.data);
         setLoading(false);
+        router.push('/workspace/edit-course/'+result.data?.courseId);
+
     } catch(e){
       setLoading(false);
       console.log(e);
