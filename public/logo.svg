@@ -1,63 +1,11 @@
-<svg width="600" height="150" viewBox="0 0 600 150" xmlns="http://www.w3.org/2000/svg">
-  <!-- 
-    SVG representation of the Coursera-AI logo.
-    - The logo consists of a brain icon and text.
-    - The icon is composed of a dark blue outline and a light blue circuit pattern.
-    - The text is in a dark blue color, matching the icon's outline.
-  -->
-  
-  <defs>
-    <!-- Define colors for easy reuse -->
-    <linearGradient id="brainGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#003366;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#004080;stop-opacity:1" />
-    </linearGradient>
-    <style>
-      .dark-blue { fill: #002D62; } /* A deep, professional blue */
-      .light-blue { stroke: #00A9E0; } /* A vibrant, techy cyan */
-      .logo-text {
-        font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-        font-size: 72px;
-        font-weight: 600;
-        fill: #002D62;
-        dominant-baseline: central;
-        text-anchor: start;
-      }
-    </style>
-  </defs>
-
-  <!-- Group for the entire logo for easy scaling and positioning -->
-  <g transform="translate(10, 10)">
-    <!-- Brain Icon Group -->
-    <g id="brain-icon" transform="scale(1.2)">
-      <!-- Brain Outline -->
-      <path class="dark-blue" d="M62.5,10.1C53.3,10.1,45.2,16,41.2,24.1c-2.3-1.1-4.9-1.7-7.6-1.7c-9.1,0-16.9,6-20.1,14.3
-        C7.2,35.2,2,42.4,2,51.1c0,9.9,8,17.9,17.9,17.9h5.3c-0.4,1.6-0.6,3.2-0.6,4.9c0,11.8,9.6,21.4,21.4,21.4
-        c3.8,0,7.4-1,10.5-2.8c3.1,1.8,6.7,2.8,10.5,2.8c11.8,0,21.4-9.6,21.4-21.4c0-1.6-0.2-3.2-0.6-4.9h5.3
-        c9.9,0,17.9-8,17.9-17.9c0-8.7-6.2-16-14.4-17.6C90.8,19,82.8,10.1,72.9,10.1C70.2,10.1,67.7,10.7,65.4,11.8
-        C64.5,10.8,63.5,10.1,62.5,10.1z M62.5,12.1c0.6,0,1.2,0.4,1.6,0.9c-2.4,1.8-4.2,4.3-5.1,7.2c-0.4-0.1-0.8-0.1-1.2-0.1
-        c-4.8,0-9.1,2.5-11.7,6.3c-2.6-3.8-6.9-6.3-11.7-6.3c-1.9,0-3.8,0.4-5.5,1.1c-2.9-7.5-9.8-12.8-18.1-12.8
-        c-2.1,0-4.1,0.4-6,1.1c3.6-7.1,10.7-12,19-12c4.1,0,7.9,1.3,11.1,3.6C53.3,13.4,57.7,12.1,62.5,12.1z"/>
-      
-      <!-- Center Divider -->
-      <path fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" d="M51.5,22 V 88" />
-
-      <!-- Left Circuit -->
-      <g id="circuit-left" transform="translate(35, 40)">
-        <path class="light-blue" stroke-width="5" fill="none" stroke-linecap="round" d="M0,0 V25 M0,10 C-10,10 -10,0 -10,0"/>
-        <circle class="light-blue" cx="-10" cy="0" r="4" stroke-width="2"/>
-        <circle class="light-blue" cx="0" cy="25" r="4" stroke-width="2"/>
-      </g>
-      
-      <!-- Right Circuit -->
-      <g id="circuit-right" transform="translate(68, 40)">
-        <path class="light-blue" stroke-width="5" fill="none" stroke-linecap="round" d="M0,0 C10,0 10,15 10,15 M0,0 V-15"/>
-        <circle class="light-blue" cx="10" cy="15" r="4" stroke-width="2"/>
-        <circle class="light-blue" cx="0" cy="-15" r="4" stroke-width="2"/>
-      </g>
-    </g>
-
-    <!-- Text: Coursera-AI -->
-    <text x="160" y="75" class="logo-text">Coursera-AI</text>
-  </g>
-</svg>
+  <svg fill="none" height="96" viewBox="0 0 180 48" width="360" xmlns="http://www.w3.org/2000/svg">
+            <path d="m10.7788 6.1817 4.6901 17.5036v-19.24382c.3719-.08679.7478-.16322 1.1273-.22897v19.47459l5.2752-19.6871c.3801.03442.7572.07945 1.1309.13479l-5.3176 19.84571 10.5701-18.30794c.3443.15492.6835.31927 1.0172.49274l-10.6095 18.3763 15.1464-15.1465c.2731.25824.5389.52407.7971.7972l-15.1486 15.1487 18.3784-10.6108c.1734.3337.3377.6729.4926 1.0173l-18.3034 10.5675 19.8403-5.3162c.0553.3737.1003.7508.1347 1.1309l-19.6869 5.2751h19.4741c-.0658.3796-.1422.7554-.229 1.1273h-19.2481l17.507 4.691c-.1798.3443-.3693.6827-.5681 1.0149l-17.2257-4.6156 14.3874 8.3066c-.2723.2801-.5528.5522-.8411.8161l-14.1087-8.1457 10.6759 10.6758c-.3377.1973-.6817.385-1.0316.5628l-10.4426-10.4426 6.8421 11.8508c-.3746.1059-.7537.2012-1.1368.2855l-6.6825-11.5744 3.2219 12.0243c-.2872.0122-.5759.0184-.8661.0184-.0991 0-.198-.0007-.2967-.0022l-3.1483-11.7497v11.4569c-.3795-.0657-.7554-.1421-1.1273-.2289v-11.2261l-2.7759 10.36c-.3541-.1396-.7033-.289-1.0471-.4478l2.7337-10.2024-5.13175 8.8884c-.3177-.2034-.62928-.4156-.9344-.6361l5.09135-8.8186-7.1301 7.1302c-.2731-.2583-.53893-.5241-.79717-.7971l7.12787-7.1279-8.81599 5.0899c-.22059-.3051-.4328-.6167-.6363-.9344l8.89259-5.1341-10.20737 2.735c-.15888-.3438-.3083-.693-.44793-1.047l10.3599-2.776h-11.226124c-.086806-.3719-.163256-.7477-.22903-1.1273h11.452154l-11.74511583-3.1471c-.00145443-.0995-.00218417-.1991-.00218417-.2989 0-.2894.00613487-.5774.0182816-.8639l12.0258184 3.2224-11.57621-6.6836c.084291-.3832.179549-.7623.285427-1.1369l11.855683 6.8449-10.44698-10.447c.17774-.3499.36544-.6939.56273-1.0315l10.68025 10.6802-8.14896-14.1144c.26387-.2882.53605-.56863.81617-.84096l8.30809 14.38996-4.61634-17.22828c.33214-.1988.67064-.38826 1.01484-.56802z" fill="#6927da"/>
+            
+            <!-- The original text paths have been replaced with the SVG text element below -->
+            <g font-family="sans-serif" font-size="20" font-weight="bold">
+                <text x="62" y="32">
+                    <tspan fill="#0A0D12">Coursera-</tspan>
+                    <tspan fill="#6927da">AI</tspan>
+                </text>
+            </g>
+        </svg>

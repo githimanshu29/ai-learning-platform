@@ -44,7 +44,7 @@ export async function POST(req) {
             return NextResponse.json({ error: "User not authenticated or email not found." }, { status: 401 });
         }
 
-        const ai = new GoogleGenAI({
+         const ai = new GoogleGenAI({
             apiKey: process.env.GEMINI_API_KEY,
         });
         const tools = [
@@ -86,9 +86,12 @@ export async function POST(req) {
 
         let JSONResp;
         try {
+
+            console.log("Himanshu course  layout-Rawjson", RawJson);
             JSONResp = JSON.parse(RawJson);
+            console.log("Himanshu course layout-JsonREsp", JSONResp);
         } catch (parseError) {
-            console.error("Error parsing AI response as JSON:", parseError);
+            console.error("Error parsing AI response as JSON: course layout error", parseError);
             console.error("Raw AI Response causing parse error:", RawResp); // Log the problematic raw response
             return NextResponse.json({ error: "Failed to parse AI response. AI might not have returned valid JSON." }, { status: 500 });
         }

@@ -2,13 +2,29 @@
 
 import { Button } from '@/components/ui/button'
 import React from 'react'
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
 import Image from 'next/image'
 import AddNewCourseDialog from "./AddNewCourseDialog";
+import axios from 'axios'
+import {useUser} from '@clerk/nextjs'
+import CourseCard from './CourseCard'
 
 
 const CourseList = () => {
-    const [courseList, setCourseList] = useState([])
+    const [courseList, setCourseList] = useState([]);
+ const {user}=useUser();
+
+   useEffect(()=>{
+    user&&GetCourseList();
+   },[user])
+
+    const GetCourseList = async()=>{
+      const result = await axios.get('/api/courses');
+      //console.log("Himanshu course list only result",result);
+      console.log("Himanshu-course-layout",result.data);
+      setCourseList(result.data);
+
+    }
   return (
     <div className='mt-10'>
         <h2 className='font-bold text-3xl '>Course List</h2>
@@ -28,8 +44,12 @@ const CourseList = () => {
 
             </AddNewCourseDialog>
            
-        </div> : <div>
-            List of Courses
+        </div> : 
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mt-4'>
+           {courseList.map((course,index)=>(
+            <CourseCard course={course} key={index}/>
+
+           ))}
             </div>}
       
     </div>
