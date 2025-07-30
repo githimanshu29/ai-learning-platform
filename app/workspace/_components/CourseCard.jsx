@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import axios from 'axios';
 import { toast } from 'sonner';
+import { Progress } from '@/components/ui/progress';
 const BookOpenIcon = ({ className }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -99,6 +100,8 @@ const CourseCard = ({course}) => {
       <p className="mt-2 text-gray-600 font-normal text-sm flex-grow line-clamp-3">
         {Course?.description || "No description available for this course."}
       </p>
+
+   
 
       {/* Footer section with chapter count and button */}
       <div className="mt-6 flex justify-between items-center">

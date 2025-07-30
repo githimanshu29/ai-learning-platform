@@ -280,3 +280,4 @@ export default function App() {
 
 
 
+Curious and motivated CS student who loves tackling real world problems with code. Now specializing in Data Structures, Web Development and new technologies like AI and agents. Excited to join as a software engineer at an innovative company, where I can develop as a builder and produce meaningful, impactful work.

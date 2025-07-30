@@ -1,8 +1,10 @@
 import { Button } from '@/components/ui/button';
-import { BookOpenIcon, DeleteIcon, Link, LoaderCircle, PlayCircle, Settings, Trash } from 'lucide-react';
+import { BookOpenIcon, DeleteIcon,  LoaderCircle, PlayCircle, Settings, Trash } from 'lucide-react';
 import Image from 'next/image';
 import React from 'react'
 import useme2 from '../../../public/useme2.jpg'
+import { Progress } from "@/components/ui/progress"
+import Link from 'next/link';
 
 
 const EnrollCourseCard = ({course,enrollCourse, onDelete}) => {
@@ -54,7 +56,12 @@ const EnrollCourseCard = ({course,enrollCourse, onDelete}) => {
 
   const Course = course.courseJson;
 
-  // A function to handle course deletion
+  const CalculatePerProgress =()=>{
+    return (enrollCourse?.completedChapters?.length??0 /course?.courseContent?.length)*100;
+
+  }
+
+
 
 
 
@@ -83,13 +90,26 @@ const EnrollCourseCard = ({course,enrollCourse, onDelete}) => {
 
       <p className="mt-2 text-gray-600 font-normal text-sm flex-grow line-clamp-3">
         {Course?.description || "No description available for this course."}
+       
       </p>
+
+      <div className='mt-3 border p-2 rounded-lg bg-gray-50'>
+
+         <h2 className='flex justify-between text-sm text-primary '> Progress <span>{CalculatePerProgress()}%</span></h2>
+      <Progress  value={CalculatePerProgress()}/>
+
+      <Link href={'/workspace/view-course/'+course?.cid} >
+
+      <Button className={'w-full mt-3 cursor-pointer'}><PlayCircle/>Continue Learning</Button>
+      </Link>
+      </div>
 
       {/* Footer section with chapter count and button */}
       <div className="mt-6 flex justify-between items-center">
         <div className="flex items-center text-gray-700">
           <BookOpenIcon className="w-5 h-5 mr-2 text-gray-500" />
           <span className="text-sm font-medium">{Course?.noOfChapters}</span>
+          
         </div>
 
         <Button className="inline-flex items-center py-2 px-4 text-sm font-semibold text-center text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 focus:ring-4 focus:outline-none focus:ring-indigo-300 transition-colors duration-300 cursor-pointer"  onClick={onDelete} >

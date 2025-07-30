@@ -5,6 +5,8 @@ import axios from 'axios';
 import { useUser } from '@clerk/nextjs';
 import { UserDetailContext } from '@/context/UserDetailContext';
 
+import {SelectedChapterIndexContext} from '@/context/SelectedChapterIndexContext';
+
 const Provider = ({children}) => {
   const { user } = useUser();// This gives you the logged-in user's info directly from Clerk.
  
@@ -15,6 +17,7 @@ const Provider = ({children}) => {
 
 
   const [userDetail, setUserDetail] = useState();
+  const [selectedChapterIndex, setSelectedChapterIndex] = useState(0);
 
 
 useEffect(()=>{
@@ -40,13 +43,17 @@ useEffect(()=>{
 
   }// post req from front to back 
   return (
-    <div>
+    
     <UserDetailContext.Provider value={{userDetail, setUserDetail}}>
+      <SelectedChapterIndexContext.Provider value = {{selectedChapterIndex, setSelectedChapterIndex}}>
+        <div>
       {children} 
       {/* childrens are all components inside <Provider> (usually the entire app pages) */}
+      </div>
+      </SelectedChapterIndexContext.Provider>
     </UserDetailContext.Provider>
      
-    </div>
+   
   )
 }
 

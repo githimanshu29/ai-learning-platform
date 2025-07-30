@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Clock, BookOpen, BarChart3, ArrowRight, Zap, BrainCircuit } from 'lucide-react';
+import { Clock, BookOpen, BarChart3, ArrowRight, Zap, BrainCircuit, PlayCircle } from 'lucide-react';
 
 import Image from 'next/image';
 import usme from '../../../../public/useme.png';
@@ -7,11 +7,13 @@ import useme2 from '../../../../public/useme2.jpg';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 // Main Component for the Course Layout
 // This component is designed to be placed within your existing page structure.
 // It's self-contained and does not include headers or sidebars.
-const CourseInfo = ({course}) => {
+const CourseInfo = ({course, viewCourse}) => {
   const courseLayout = course?.courseJson;
   const [isGenerating, setIsGenerating] = useState(false);
   // Check if course and course.courseJson exist before parsing
@@ -149,7 +151,7 @@ const CourseInfo = ({course}) => {
               />
             </div>
             
-            <button 
+            {!viewCourse ?<button 
               onClick={handleGenerateContent}
               disabled={isGenerating}
               className="w-full bg-violet-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:bg-violet-700 focus:outline-none focus:ring-4 focus:ring-violet-300 transition-all duration-300 ease-in-out transform hover:-translate-y-1 flex items-center justify-center group cursor-pointer disabled:bg-slate-400 disabled:cursor-not-allowed disabled:transform-none"
@@ -157,7 +159,7 @@ const CourseInfo = ({course}) => {
               <Zap className="mr-2 h-5 w-5" />
               Generate Content
               <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
-            </button>
+            </button>  : <Link href={'/course/'+course?.cid}><Button className={'w-full cursor-pointer'}><PlayCircle/>Continue Learning</Button></Link> }
           </div>
         </div>
 

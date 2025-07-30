@@ -56,28 +56,41 @@ export async function POST(req){
 
 export async function GET(req){
     const user = await currentUser();
+    const { searchParams } = new URL(req.url);
+    const courseId = searchParams.get("courseId");
 
-    // --- Start of GET function improvements ---
-    // 1. Robust User and Email Check at the beginning
+    // Define userEmail here, so it's available in both blocks
     if (!user || !user.primaryEmailAddress || !user.primaryEmailAddress.emailAddress) {
         console.error("GET /api/enroll-course: Unauthorized - User not authenticated or email missing.");
-        // For a GET endpoint that fetches user-specific data, returning 401 with an empty array is appropriate.
         return NextResponse.json({ error: "Authentication required or user email not found." }, { status: 401 });
     }
+    const userEmail = user.primaryEmailAddress.emailAddress;
 
-    const userEmail = user.primaryEmailAddress.emailAddress; // Safely extract the user's email
-
-    try {
+    if(courseId){
+        // Now userEmail is available here
         const result = await db.select()
             .from(coursesTable)
             .innerJoin(enrollCourseTable, eq(coursesTable.cid, enrollCourseTable.cid))
-            .where(eq(enrollCourseTable.userEmail, userEmail)) // <-- CORRECTED WHERE CLAUSE
-            .orderBy(desc(enrollCourseTable.id)); // `desc` is now imported
+            .where(and(eq(enrollCourseTable.userEmail, userEmail), eq(enrollCourseTable.cid, courseId)))
+            .orderBy(desc(enrollCourseTable.id))
+            return NextResponse.json(result[0]);
 
-        console.log("Himanshu----Enrolled courses for user from enroll api", userEmail, ":", result);
-        return NextResponse.json(result);
-    } catch (error) {
-        console.error("Error in GET /api/enroll-course:", error);
-        return NextResponse.json({ error: "Failed to retrieve enrolled courses." }, { status: 500 });
+    } else {
+        // userEmail is also available here
+        try {
+            const result = await db.select()
+                .from(coursesTable)
+                .innerJoin(enrollCourseTable, eq(coursesTable.cid, enrollCourseTable.cid))
+                .where(eq(enrollCourseTable.userEmail, userEmail))
+                .orderBy(desc(enrollCourseTable.id));
+
+            console.log("Himanshu----Enrolled courses for user from enroll api", userEmail, ":", result);
+            return NextResponse.json(result);
+        } catch (error) {
+            console.error("Error in GET /api/enroll-course:", error);
+            return NextResponse.json({ error: "Failed to retrieve enrolled courses." }, { status: 500 });
+        }
     }
 }
+
+   

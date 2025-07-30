@@ -8,7 +8,7 @@ import ChapterTopicList from '../_components/ChapterTopicList.jsx';
 import { LoaderCircle } from 'lucide-react';
 
 
-const EditCourse = () => {
+const EditCourse = ({viewCourse=false}) => {
     const {courseId} = useParams();
     const [loading, setLoading] = useState(false);
     const [course, setCourse] = useState({});
@@ -80,7 +80,7 @@ const EditCourse = () => {
 
   return (
     <div>
-        <CourseInfo course={course}  />
+        <CourseInfo course={course} viewCourse={viewCourse} />
         <ChapterTopicList course={course} />
 
     </div>

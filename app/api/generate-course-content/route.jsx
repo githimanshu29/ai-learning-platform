@@ -12,6 +12,10 @@ const PROMPT = `You are an expert course creator.
 Generate course chapter content in VALID JSON format.
 Crate as much content as you can very vast content , it should like a complete course content.
 
+strict order 1-> for each and every topic,even for small heading generate as much content as you can , generate examples related to even small heading, try visualize the heading and topic, do not just give the general information behave like proffessional tutor and coach
+
+strict order 2-> For definitions or introductory headings don't just gererate some lines, you have to generate a vast content for each and every definition or introductory heading, you have to generate examples, 
+
 Rules:
 - Use double quotes for all keys and string values
 - No markdown (no \`\`\')
