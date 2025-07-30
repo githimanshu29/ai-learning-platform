@@ -1,106 +1,9 @@
-import { coursesTable } from '@/config/schema';
-import {
-    GoogleGenAI,
-  } from '@google/genai';
-import { NextResponse } from 'next/server';
-import db from '@/config/db';
-
-import { currentUser } from '@clerk/nextjs/server';
-
-const PROMPT = `Generate Learning Course depends on following details. In which Make sure to add Course Name, Description, Course Banner Image Prompt (Create a modern, flat-style 2D digital illustration representing user Topic. Include UI/UX elements such as mock-up screens, text blocks, icons, buttons, and creative workspace tools. Add symbolic elements related to user Course, like sticky notes, design components, and visual aids. Use a vibrant color palette [blues, purples, oranges] with a clean, professional look. The illustration should feel creative, tech-savvy, and educational, ideal for visualizing concepts in user Course) for Course Banner in 3d format. Chapter Name, Topic under each chapters, Duration for each chapters etc. in .JSON format only.
-
-Schema:
-
-{
-  "course": {
-    "name": "string",
-    "description": "string",
-    "category": "string",
-    "level": "string",
-    "includeVideo": "boolean",
-    "noOfChapters": "number",
-    "bannerImagePrompt": "string",
-    "chapters": [
-      {
-        "chapterName": "string",
-        "duration": "string",
-        "topics": [
-          "string"
-        ]
-      }
-    ]
-  }
-}, User Input:
-
-`
-
-export async function POST(req) {
-    const {courseId, ...formData} = await req.json();
-    const user= await currentUser()
-      
-
-
-    const ai = new GoogleGenAI({
-      apiKey: process.env.GEMINI_API_KEY,
-    });
-    const tools = [
-      {
-        googleSearch: {
-        }
-      },
-    ];
-    const config = {
-      thinkingConfig: {
-        thinkingBudget: -1,
-      },
-      tools,
-      responseMimeType: 'text/plain',
-    };
-    const model = 'gemini-2.5-pro';
-    const contents = [
-      {
-        role: 'user',
-        parts: [
-          {
-            text: PROMPT+JSON.stringify(formData),
-          },
-        ],
-      },
-    ];
-  
-    const response = await ai.models.generateContent({
-      model,
-      config,
-      contents,
-    });
-    console.log(response.candidates[0].content.parts[0].text);
-    const RawResp = response.candidates[0]?.content.parts[0]?.text;
-    const RawJson = RawResp.replace('```json', '').replace('```', '').trim();
-    const JSONResp = JSON.parse(RawJson);
- 
-
-    // save all the data to database
-    const result = await db.insert(coursesTable).values({
-        ...formData,
-        courseJson: JSONResp,
-        userEmail: user?.primaryEmailAddress?.emailAddress ,
-        cid: courseId
-
-
-    })
-
-    return NextResponse.json({ courseId: courseId})
-
-   
-  }
-  
-
-  
-
+"use client";
 
 
 import React, { useEffect, useRef } from 'react';
 import { BrainCircuit, ArrowRight, Zap, BookOpen, Target } from 'lucide-react';
+import Link from 'next/link';
 
 // Helper function to create a particle for the background animation
 const createParticle = (canvas) => {
@@ -202,7 +105,7 @@ const AnimatedBackground = () => {
 
 
 // Main Page Component
-export default function App() {
+export default function Landingpage() {
     const handleExploreClick = () => {
         // This would typically navigate to another page in a real Next.js app
         // For example, using Next's router: router.push('/dashboard')
@@ -259,13 +162,15 @@ export default function App() {
                     </div>
 
                     <div className="flex justify-center">
+                        <Link href="/workspace">
                          <button
                             onClick={handleExploreClick}
-                            className="flex items-center justify-center w-full sm:w-auto px-10 py-4 font-semibold text-white transition-all duration-300 ease-in-out rounded-full bg-gradient-to-br from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 focus:outline-none focus:ring-4 focus:ring-blue-300/50 transform hover:scale-105 shadow-lg hover:shadow-xl shadow-blue-500/20"
+                            className="flex items-center justify-center w-full sm:w-auto px-10 py-4 font-semibold text-white transition-all duration-300 ease-in-out rounded-full bg-gradient-to-br from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 focus:outline-none focus:ring-4 focus:ring-blue-300/50 transform hover:scale-105 shadow-lg hover:shadow-xl shadow-blue-500/20 cursor-pointer"
                         >
                             Explore & Learn
                             <ArrowRight className="w-5 h-5 ml-3" />
                         </button>
+                        </Link>
                     </div>
                 </div>
 
@@ -276,7 +181,3 @@ export default function App() {
         </div>
     );
 }
-
-
-
-

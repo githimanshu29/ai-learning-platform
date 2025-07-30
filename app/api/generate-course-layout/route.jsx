@@ -60,7 +60,7 @@ export async function POST(req) {
             tools,
             responseMimeType: 'text/plain',
         };
-        const model = 'gemini-2.5-flash-lite'; // Using a stable model name
+        const model = 'gemini-2.0-flash-lite'; // Using a stable model name
         const contents = [
             {
                 role: 'user',
@@ -87,9 +87,9 @@ export async function POST(req) {
         let JSONResp;
         try {
 
-            console.log("Himanshu course  layout-Rawjson", RawJson);
+            //console.log("Himanshu course  layout-Rawjson", RawJson);
             JSONResp = JSON.parse(RawJson);
-            console.log("Himanshu course layout-JsonREsp", JSONResp);
+            //console.log("Himanshu course layout-JsonREsp", JSONResp);
         } catch (parseError) {
             console.error("Error parsing AI response as JSON: course layout error", parseError);
             console.error("Raw AI Response causing parse error:", RawResp); // Log the problematic raw response

@@ -55,7 +55,7 @@ const CourseInfo = ({course}) => {
      
 
     try{
-      await new Promise(resolve => setTimeout(resolve, 5000));
+      //await new Promise(resolve => setTimeout(resolve, 5000));
     const result = await axios.post('/api/generate-course-content', {
       courseJson: courseLayout,
       courseTitle: course?.name,
