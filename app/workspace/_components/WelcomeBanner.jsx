@@ -2,12 +2,14 @@ import React from 'react'
 
 const WelcomeBanner = () => {
   return (
-    <div className='p-5 bg-linear-to-r from-indigo-500 via-blue-500 to-cyan-500 rounded-xl -mt-3.5'>
-
-        <h2 className='font-bold text-2xl text-white'>Welcome to online learning platform</h2>
-        <p className='text-white'>Learn, Create and Explore your favorite courses </p>
-      
-    </div>
+    <div className="w-full max-w-4xl p-8 rounded-xl border border-slate-700/80 bg-slate-900/50 backdrop-blur-lg">
+    <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">
+        Welcome to the AI Learning Platform
+    </h1>
+    <p className="text-base md:text-lg text-slate-300">
+        Create, Explore, and Master your next course with the power of AI.
+    </p>
+</div>
   )
 }
 

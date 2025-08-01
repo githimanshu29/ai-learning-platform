@@ -1,6 +1,6 @@
 "use client"
 
-import AppHeader from '@/app/workspace/_components/AppHeader'
+import AppHeader2 from '@/app/workspace/_components/AppHeader2'
 import React, { useEffect, useState } from 'react'
 import ChapterListSidebar from '../_components/ChapterListSidebar'
 import ChapterContent from '../_components/ChapterContent'
@@ -28,12 +28,14 @@ const Course = () => {
     
 
 
-  return (
+  return ( 
     <div>
-        <AppHeader hideSidebar={true}/>
+        <AppHeader2 hideSidebar={true} />
+        <div className='bg-black'>
         <div className='flex gap-10'>
             <ChapterListSidebar courseInfo={courseInfo}/>
             <ChapterContent courseInfo={courseInfo}/>
+        </div>
         </div>
 
       
@@ -42,3 +44,5 @@ const Course = () => {
 }
 
 export default Course
+
+

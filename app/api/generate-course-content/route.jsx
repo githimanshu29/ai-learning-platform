@@ -5,16 +5,20 @@ import axios from 'axios';
 import { coursesTable } from '@/config/schema.js';
 import { eq } from 'drizzle-orm';
 import { jsonrepair } from 'jsonrepair';
+import MODEL from '../../../Model.js'
 
 // Your PROMPT is fine, no changes needed here.
-const PROMPT = `You are an expert course creator.
+const PROMPT = `You are an expert and professional course creator and tutor.
 
 Generate course chapter content in VALID JSON format.
 Crate as much content as you can very vast content , it should like a complete course content.
 
 strict order 1-> for each and every topic,even for small heading generate as much content as you can , generate examples related to even small heading, try visualize the heading and topic, do not just give the general information behave like proffessional tutor and coach
 
-strict order 2-> For definitions or introductory headings don't just gererate some lines, you have to generate a vast content for each and every definition or introductory heading, you have to generate examples, 
+strict order 2-> For definitions or introductory headings don't just gererate some lines, you have to generate a vast content for each and every definition or introductory heading, you have to generate examples
+
+strict order 3-> Generate all the chapters provided to you with thier topics and the try to complete the entire course in given chapters, if chapters are less then generate more topics as you can inside a chapter and make it a complete course content. Take course from beginning to advance
+
 
 Rules:
 - Use double quotes for all keys and string values
@@ -62,7 +66,7 @@ export async function POST(req) {
     ];
 
     const response = await ai.models.generateContent({
-        model: 'gemini-2.0-flash-lite', // Using a more standard model name
+        model: 'gemini-2.5-flash-lite', // Using a more standard model name
         config,
         contents,
     });

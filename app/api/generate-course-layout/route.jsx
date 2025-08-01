@@ -7,7 +7,20 @@ import db from '@/config/db';
 
 import { currentUser } from '@clerk/nextjs/server';
 
+
 const PROMPT = `Generate Learning Course depends on following details. In which Make sure to add Course Name, Description, Course Banner Image Prompt (Create a modern, flat-style 2D digital illustration representing user Topic. Include UI/UX elements such as mock-up screens, text blocks, icons, buttons, and creative workspace tools. Add symbolic elements related to user Course, like sticky notes, design components, and visual aids. Use a vibrant color palette [blues, purples, oranges] with a clean, professional look. The illustration should feel creative, tech-savvy, and educational, ideal for visualizing concepts in user Course) for Course Banner in 3d format. Chapter Name, Topic under each chapters, Duration for each chapters etc. in .JSON format only.
+
+
+strict order: Generate layout such as the following error never appear-> "Error parsing AI response as JSON: course layout error SyntaxError: Unexpected token 'H', "Here's the"... is not valid JSON
+    at JSON.parse (<anonymous>)
+    at POST (app\api\generate-course-layout\route.jsx:91:28)
+  89 |
+  90 |             //console.log("Himanshu course  layout-Rawjson", RawJson);
+> 91 |             JSONResp = JSON.parse(RawJson);
+     |                            ^
+  92 |             //console.log("Himanshu course layout-JsonREsp", JSONResp);
+  93 |         } catch (parseError) {
+  94 |             console.error("Error parsing AI response as JSON: course layout error", parseError);"
 
 Schema:
 
@@ -60,7 +73,7 @@ export async function POST(req) {
             tools,
             responseMimeType: 'text/plain',
         };
-        const model = 'gemini-2.0-flash-lite'; // Using a stable model name
+        const model ="gemini-2.5-flash-lite"; // Using a stable model name
         const contents = [
             {
                 role: 'user',
