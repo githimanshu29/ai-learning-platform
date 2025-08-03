@@ -1,5 +1,3 @@
-// page.jsx
-
 "use client"
 import React, { useEffect, useState } from 'react';
 import WelcomeBanner from './_components/WelcomeBanner';
@@ -52,11 +50,9 @@ const Workspace = () => {
       {/* <AnimatedBackground /> */}
       <WelcomeBanner />
       <EnrollCourseList enrolledCourses={enrolledCourses} onDataChange={fetchAllCourses} />
-      <CourseList courseList={courseList}  enrolledCourses={enrolledCourses}onDataChange={fetchAllCourses} />
+      <CourseList courseList={courseList} onDataChange={fetchAllCourses} />
     </div>
   );
 };
 
 export default Workspace;
-
-

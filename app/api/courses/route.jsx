@@ -18,7 +18,7 @@ export async function GET(req) {
         .select()
         .from(coursesTable)
         .where(eq(coursesTable.cid, courseId))
-        .orderBy(desc(enrollCourseTable.id));
+      
         
         
         ;
