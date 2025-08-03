@@ -66,7 +66,7 @@ export async function POST(req) {
     ];
 
     const response = await ai.models.generateContent({
-        model: 'gemini-2.5-flash-lite', // Using a more standard model name
+        model: 'gemini-2.5-flash-lite', 
         config,
         contents,
     });
@@ -76,10 +76,7 @@ export async function POST(req) {
 
     let JSONResp;
     try {
-      // ✅ KEY CHANGE: Instead of fragile string replacement, we parse first,
-      // then safely fix the keys inside the JavaScript object. This is robust.
-      
-      // 1. Let jsonrepair fix any minor syntax issues (like trailing commas).
+     
       const repairedJSONString = jsonrepair(cleanedResp);
 
       // 2. Parse the repaired string into a JavaScript object.

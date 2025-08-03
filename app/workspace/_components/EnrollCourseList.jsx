@@ -10,16 +10,18 @@ import AnimatedSpinner from './AnimatedSpinner';
 import Image from 'next/image';
 
 const EnrollCourseList = ({ enrolledCourses, onDataChange }) => {
+    console.log('enrolledcourse', enrolledCourses)
 
     const handleDeleteEnrolledCourse = async (enrollmentId) => {
         try {
-            toast.success("Course deleted successfully!");
             
             const response = await axios.delete('/api/delete-course', {
                 data: { enrollmentId: enrollmentId }
             });
 
             if (response.data.success) {
+            toast.success("Course deleted successfully!");
+
                 onDataChange();
             } else {
                 toast.error("Failed to delete course on the server.");

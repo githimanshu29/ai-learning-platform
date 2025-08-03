@@ -2,30 +2,27 @@ import { currentUser } from "@clerk/nextjs/server";
 import db from "@/config/db";
 import { coursesTable, enrollCourseTable } from "@/config/schema";
 
-// Ensure all necessary Drizzle-orm functions are imported
-import { and, eq, desc } from "drizzle-orm"; // Added 'desc' here
+
+import { and, eq, desc } from "drizzle-orm"; 
 import { NextResponse } from "next/server";
 
 export async function POST(req){
     const { courseId } = await req.json();
-    const user = await currentUser(); // Await currentUser() to ensure it resolves
-
-    // --- Start of POST function improvements ---
+    const user = await currentUser(); 
     // 1. Robust User and Email Check at the beginning
     if (!user || !user.primaryEmailAddress || !user.primaryEmailAddress.emailAddress) {
         console.error("POST /api/enroll-course: Unauthorized - User not authenticated or email missing.");
         return NextResponse.json({ error: "Authentication required or user email not found." }, { status: 401 });
     }
 
-    const userEmail = user.primaryEmailAddress.emailAddress; // Safely extract the user's email
-
+    const userEmail = user.primaryEmailAddress.emailAddress; 
     try {
-        // Check if already enrolled
+        
         const enrollCourses = await db.select()
             .from(enrollCourseTable)
             .where(
                 and(
-                    eq(enrollCourseTable.userEmail, userEmail), // Correctly comparing column to user's email
+                    eq(enrollCourseTable.userEmail, userEmail), 
                     eq(enrollCourseTable.cid, courseId)
                 )
             );
@@ -34,9 +31,9 @@ export async function POST(req){
             // Not enrolled, proceed with enrollment
             const result = await db.insert(enrollCourseTable).values({
                 cid: courseId,
-                userEmail: userEmail, // Use the safely extracted userEmail
-                completedChapters: {} // Provide an empty object if 'completedChapters' is NOT NULL and doesn't have a default
-            }).returning(); // .returning() without arguments returns all columns of the inserted row
+                userEmail: userEmail, 
+                completedChapters: {} 
+            }).returning(); 
 
             console.log("Course enrolled successfully:", result);
             return NextResponse.json(result);

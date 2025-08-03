@@ -4,7 +4,7 @@
 import React, { useRef, useState } from 'react';
 import useme2 from '../../../public/useme2.jpg';
 import Image from 'next/image';
-import { LoaderCircle, PlayCircle, Settings } from 'lucide-react';
+import { DeleteIcon, LoaderCircle, PlayCircle, Settings, Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import axios from 'axios';
@@ -34,9 +34,11 @@ const CpuIcon = (props) => (
   </svg>
 );
 
-const CourseCard = ({ course, onEnrollSuccess }) => {
+const CourseCard = ({ course, onEnrollSuccess,onDelete }) => {
   const cardRef = useRef(null);
   const [loading, setLoading] = useState(false);
+
+
 
   // Extract course data safely
   const Course = course?.courseJson;
@@ -297,9 +299,12 @@ const CourseCard = ({ course, onEnrollSuccess }) => {
           </div>
           <h2 className="course-title">{Course?.name || "Untitled Course"}</h2>
           <p className="course-description">{Course?.description || "No description available."}</p>
-          <div className="course-meta">
+          <div className="course-meta flex justify-between">
+            <div className='flex'>
             <BookOpenIcon style={{ marginRight: '8px', width: '18px' }} />
             <span>{Course?.noOfChapters || 0} Lessons</span>
+            </div>
+            <Button className='cursor-pointer hover:bg-red-600 z-40' onClick={onDelete}><Trash2/></Button>
           </div>
           <div className="button-container">
             {courseHasContent ? (
@@ -311,6 +316,8 @@ const CourseCard = ({ course, onEnrollSuccess }) => {
                 {loading ? <LoaderCircle className="loader-spin" size={18} /> : <PlayCircle size={18} />}
                 Enroll Now
               </Button>
+
+              
             ) : (
               <Link href={`/workspace/edit-course/${course?.cid}`} className="w-full">
                 <Button className="btn " >

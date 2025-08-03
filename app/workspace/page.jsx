@@ -52,7 +52,7 @@ const Workspace = () => {
       {/* <AnimatedBackground /> */}
       <WelcomeBanner />
       <EnrollCourseList enrolledCourses={enrolledCourses} onDataChange={fetchAllCourses} />
-      <CourseList courseList={courseList} onDataChange={fetchAllCourses} />
+      <CourseList courseList={courseList}  enrolledCourses={enrolledCourses}onDataChange={fetchAllCourses} />
     </div>
   );
 };

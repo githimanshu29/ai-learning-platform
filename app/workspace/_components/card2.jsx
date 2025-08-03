@@ -14,18 +14,7 @@ const CpuIcon = (props) => (
     </svg>
 );
 
-/**
- * MagneticGlowCard Component
- * An astonishing card with crystal-clear text and a unique "magnetic"
- * interaction that responds to the user's mouse.
- *
- * Features:
- * - Magnetic pull effect: Card moves towards the cursor.
- * - Parallax icon: Icon moves away from the cursor.
- * - A glowing border and background that tracks the mouse.
- * - Perfectly sharp text with no blur.
- * - Smooth, physics-based transitions for an organic feel.
- */
+
 const MagneticGlowCard = ({ title, description, lessons, iconUrl }) => {
   const cardRef = useRef(null);
 

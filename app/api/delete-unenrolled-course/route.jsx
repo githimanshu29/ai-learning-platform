@@ -2,13 +2,15 @@ import { NextResponse } from 'next/server';
 import db from "@/config/db";
 import { enrollCourseTable } from "@/config/schema";
 import { eq } from 'drizzle-orm';
+import { coursesTable } from '@/config/schema';
 
 export async function DELETE(req) {
     try {
         // Correctly parse the request body as JSON
-        const { enrollmentId } = await req.json();
+        const { courseId } = await req.json();
+        console.log('Received courseId:', courseId)
 
-        if (!enrollmentId) {
+        if (!courseId) {
             // Use NextResponse to return a JSON response with a status code
             return NextResponse.json(
                 { success: false, message: 'Enrollment ID is required.' },
@@ -16,23 +18,28 @@ export async function DELETE(req) {
             );
         }
 
+        await db
+        .delete(enrollCourseTable)
+        .where(eq(enrollCourseTable.cid, courseId));
+
+
         // Use Drizzle ORM to delete the enrollment record
-        const deletedEnrollments = await db
-            .delete(enrollCourseTable)
-            .where(eq(enrollCourseTable.id, enrollmentId))
+        const deletedCourses = await db
+            .delete(coursesTable)
+            .where(eq(coursesTable.cid, courseId))
             .returning();
 
         // Check if a record was actually deleted
-        if (deletedEnrollments.length === 0) {
+        if (deletedCourses.length === 0) {
             return NextResponse.json(
-                { success: false, message: 'Enrollment not found.' },
+                { success: false, message: 'course not found.' },
                 { status: 404 }
             );
         }
 
         // Return a successful response
         return NextResponse.json(
-            { success: true, message: 'Enrollment deleted successfully.' },
+            { success: true, message: 'course deleted successfully.' },
             { status: 200 }
         );
 

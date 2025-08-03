@@ -14,7 +14,7 @@ const ChapterContent = ({courseInfo}) => {
   const content = courseContent?.[selectedChapterIndex]?.courseData?.content;
 
   return (
-    // Main container with padding and dark theme styles
+   
     <div className='p-4 md:p-8'>
       <div className='flex justify-between items-center mb-6'>
         <h2 className='text-2xl md:text-3xl font-bold text-white'>
@@ -52,7 +52,7 @@ const ChapterContent = ({courseInfo}) => {
       {/* Main Content Section */}
       <div className='mt-10'>
         {content?.map((data, index) => (
-          // THE FIX: Replaced 'bg-secondary' with the glassmorphism style to match the UI
+         
           <div key={index} className='mt-8 p-6 md:p-8 bg-cyan-950 backdrop-blur-lg border border-slate-700/80 rounded-2xl'> 
             <h2 className='font-bold text-2xl text-teal-300 mb-4'>{index + 1}. {data?.topic}</h2>
             
@@ -65,7 +65,7 @@ const ChapterContent = ({courseInfo}) => {
         ))}
       </div>
 
-      {/* This style block ensures the dynamically inserted HTML is readable and matches the theme */}
+     
       <style jsx global>{`
         .prose-styles {
           color: #d1d5db; /* Light gray text */

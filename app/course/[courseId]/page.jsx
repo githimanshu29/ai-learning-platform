@@ -1,3 +1,5 @@
+
+
 "use client"
 
 import AppHeader2 from '@/app/workspace/_components/AppHeader2'
@@ -6,41 +8,35 @@ import ChapterListSidebar from '../_components/ChapterListSidebar'
 import ChapterContent from '../_components/ChapterContent'
 import { useParams } from 'next/navigation'
 import axios from 'axios'
-const Course = () => {
 
-    const {courseId} = useParams();
+const Course = () => {
+    const { courseId } = useParams();
     const [courseInfo, setcourseInfo] = useState();
 
+    useEffect(() => {
+        if (courseId) {
+            GetEnrollledCourseById();
+        }
+    }, [courseId]);
 
-
-    useEffect(()=>{
-        GetEnrollledCourseById();
-    },[]);
-
-    const GetEnrollledCourseById = async()=>{
-        const result = await axios.get('/api/enroll-course?courseId='+courseId);
-        console.log("himanshu-getenrolled-data-only-result-data",result);
-
-        console.log("himanshu-getenrolled-data",result.data);
+    const GetEnrollledCourseById = async () => {
+        const result = await axios.get('/api/enroll-course?courseId=' + courseId);
         setcourseInfo(result.data);
-
     }
-    
 
-
-  return ( 
-    <div>
-        <AppHeader2 hideSidebar={true} />
-        <div className='bg-black'>
-        <div className='flex gap-10'>
-            <ChapterListSidebar courseInfo={courseInfo}/>
-            <ChapterContent courseInfo={courseInfo}/>
+    return (
+        <div className='flex flex-col h-screen'>
+            <AppHeader2 hideSidebar={true} />
+            <div className='flex flex-1 overflow-hidden bg-black'>
+                <div className="hidden md:block">
+                    <ChapterListSidebar courseInfo={courseInfo} />
+                </div>
+                <div className="flex-1 overflow-y-auto">
+                    <ChapterContent courseInfo={courseInfo} />
+                </div>
+            </div>
         </div>
-        </div>
-
-      
-    </div>
-  )
+    )
 }
 
 export default Course
